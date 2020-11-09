@@ -23,6 +23,10 @@ pipeline
 			steps
 			{
 				powershell 'cd ./RestaurantWebApplication; dotnet publish'
+
+				powershell 'New-Item ./RestaurantWebApplication/bin/Debug/netcoreapp2.1/publish/App_Data/jobs/continuous/restaurant-web-job -ItemType Directory'
+				powershell 'Copy-Item ./RestaurantWebJob_Release/* -Destination ./RestaurantWebApplication/bin/Debug/netcoreapp2.1/publish/App_Data/jobs/continuous/restaurant-web-job -Recurse'
+
 				powershell 'Compress-Archive -Path ./RestaurantWebApplication/bin/Debug/netcoreapp2.1/publish/* -DestinationPath ./dotnet-core-app.zip'
 			}
 		}
