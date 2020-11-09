@@ -37,7 +37,7 @@ pipeline
 			{
 				withCredentials([azureServicePrincipal(credentialsId: 'myMicrosoftAzureServicePrincipal')])
 				{
-					powershell 'az deployment group create --resource-group airwolf-resource-group --parameters webAppName="restaurant-web-app-dotnet" sku="B1" --template-file ./create-azure-app-service-app.json'
+					powershell 'az deployment group create --resource-group airwolf-resource-group --parameters webAppName="restaurant-web-app-dotnet" --template-file ./create-azure-app-service-app.json'
 				}
 			}
 		}
