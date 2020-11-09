@@ -1,0 +1,52 @@
+pipeline
+{
+	agent any
+
+	options
+	{
+		skipDefaultCheckout()
+	}
+
+	stages
+	{
+		stage('Checkout Source')
+		{
+			steps
+			{
+				deleteDir()
+				checkout scm
+			}
+		}
+
+		stage('Create .NET Core Application ZIP File')
+		{
+			steps
+			{
+				powershell 'cd ./RestaurantWebApplication; dotnet publish'
+				powershell 'Compress-Archive -Path ./RestaurantWebApplication/bin/Debug/netcoreapp2.1/publish/* -DestinationPath ./dotnet-core-app.zip'
+			}
+		}
+
+		stage('Create Azure App Service')
+		{
+			steps
+			{
+				withCredentials([azureServicePrincipal(credentialsId: 'myMicrosoftAzureServicePrincipal')])
+				{
+					powershell 'az deployment group create --resource-group airwolf-resource-group --parameters webAppName="restaurant-web-app-dotnet" sku="B1" --template-file ./create-azure-app-service-app.json'
+				}
+			}
+		}
+
+		stage('Deploy ZIP File to Azure App Service')
+		{
+			steps
+			{
+				withCredentials([azureServicePrincipal(credentialsId: 'myMicrosoftAzureServicePrincipal')])
+				{
+					powershell 'az webapp deployment source config-zip --resource-group airwolf-resource-group --name restaurant-web-app-dotnet --src ./dotnet-core-app.zip'
+				}
+			}
+		}
+	}
+}

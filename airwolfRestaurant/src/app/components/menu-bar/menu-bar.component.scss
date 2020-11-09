@@ -1,0 +1,48 @@
+#menuDiv{
+  width: 100%;
+  padding-top: 40px;
+  padding-left: 50px;
+}
+
+.menuSections{
+  width: 25%;
+  float: left;
+}
+
+.menuImages{
+  width: 200px;
+  height: 200px;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid blue;
+    border-bottom: 16px solid blue;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    top:-100%; right:-100%; left:-100%; bottom:-100%;
+    margin:auto;
+    z-index:0;
+}
+  
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sectionItems{
+  padding-left: 20px;
+}
+
+.menuTitle{
+  padding-top: 20px;
+}
+
+.icon{
+  size: initial;
+  padding-left: 5px;
+}

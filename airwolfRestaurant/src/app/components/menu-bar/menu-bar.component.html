@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="loader" *ngIf="isLoading"></div>
+<div *ngIf="!isLoading">
+  <h1 class="text-center menuTitle">{{ title }}</h1>
+  <div id="menuDiv">
+    <div class="menuSections">
+      <img class="menuImages" src="../../../assets/startersImage.jpg">
+      <h4>{{ this.menuResult.sections[0].name }}</h4>
+      <ul class="sectionItems" *ngFor="let item of snackItems">
+        <li>
+          {{ item.name }}
+          <span class="icon glyphicon glyphicon-plus-sign" (click)="addToMenu(item.name)"></span>
+          <span class="icon glyphicon glyphicon-minus-sign" (click)="removeFromMenu(item.name)"></span>
+        </li>
+      </ul>
+    </div>
+    <div class="menuSections">
+      <img class="menuImages" src="../../../assets/mainCourseImage.jpg">
+      <h4>{{ this.menuResult.sections[1].name }}</h4>
+      <ul class="sectionItems" *ngFor="let item of mainCourseItems">
+        <li>
+          {{ item.name }}
+          <span class="icon glyphicon glyphicon-plus-sign" (click)="addToMenu(item.name)"></span>
+          <span class="icon glyphicon glyphicon-minus-sign" (click)="removeFromMenu(item.name)"></span>
+        </li>
+      </ul>
+    </div>
+    <div class="menuSections">
+      <img class="menuImages" src="../../../assets/dessertsImage.jpg">
+      <h4>{{ this.menuResult.sections[2].name }}</h4>
+      <ul class="sectionItems" *ngFor="let item of dessertItems">
+        <li>
+          {{ item.name }}
+          <span class="icon glyphicon glyphicon-plus-sign" (click)="addToMenu(item.name)"></span>
+          <span class="icon glyphicon glyphicon-minus-sign" (click)="removeFromMenu(item.name)"></span>
+        </li>
+      </ul>
+    </div>
+    <div class="menuSections">
+      <img class="menuImages" src="../../../assets/beveragesImage.jpg">
+      <h4>{{ this.menuResult.sections[3].name }}</h4>
+      <ul class="sectionItems" *ngFor="let item of beverageItems">
+        <li>
+          {{ item.name }}
+          <span class="icon glyphicon glyphicon-plus-sign" (click)="addToMenu(item.name)"></span>
+          <span class="icon glyphicon glyphicon-minus-sign" (click)="removeFromMenu(item.name)"></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <button (click)="placeOrder()">Place Order</button>
+  </div>
+</div>
